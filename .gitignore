@@ -1,0 +1,7 @@
+
+/public/storage
+/storage/*.key
+/config/app.php
+.env
+stubs/
+vendor/
