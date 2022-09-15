@@ -270,7 +270,7 @@ class ResourceController extends Controller
                                             'fileLocation' => $fileLocation,
                                             'tag' => $tag,
                                             'thumbnailLocation' => $thumbnailLocation,
-                                        ]);
+                                        ]);return $request;
                                     $this->upload($request);
                                 }
                             }
