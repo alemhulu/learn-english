@@ -73,14 +73,7 @@ class WelcomeController extends Controller
         $this->resources2=cache()->remember('resources2', 60*60*24*10, function () {
             return Course::groupBy('name')->pluck('name');
         });
-        //Cache unit title
-        $this->resources3=cache()->remember('resources3', 60*60*24*10, function () {
-            return Unit::groupBy('title')->pluck('title');
-        });
-        //Cache subunit title
-        $this->resources4=cache()->remember('resources4', 60*60*24*10, function () {
-            return Subunit::groupBy('title')->pluck('title');
-        });
+       
         //Cache media name
         $this->resources5=cache()->remember('resources5', 60*60*24*10, function () {
             return Media::groupBy('name')->pluck('name');
@@ -109,21 +102,7 @@ class WelcomeController extends Controller
                     array_push($this->tag, $tags);
                 }
             }
-            foreach ($this->resources3 as $tags) {
-                if ($tags!=null) {
-                    array_push($this->tag, $tags);
-                }
-            }
-            foreach ($this->resources4 as $tags) {
-                if ($tags!=null) {
-                    array_push($this->tag, $tags);
-                }
-            }
-            foreach ($this->resources4 as $tags) {
-                if ($tags!=null) {
-                    array_push($this->tag, $tags);
-                }
-            }
+           
             foreach ($this->resources5 as $tags) {
                 if ($tags!=null) {
                     array_push($this->tag, $tags);
@@ -141,7 +120,7 @@ class WelcomeController extends Controller
             }
             return array_values(array_unique($this->tag));
         });
-        $this->types = Type::inRandomOrder()->paginate(5, ['*'], 'types');
+        $this->types = Type::inRandomOrder()->paginate(7, ['*'], 'types');
     }
 
     /**
