@@ -179,7 +179,7 @@
                   @endforeach
                 </div>
               </div>
-              {!!$paginatedResources[$type->id]->appends(['types'=>$types->currentPage()])->links()!!}
+              
               @endif
               @endforeach
             </div>
