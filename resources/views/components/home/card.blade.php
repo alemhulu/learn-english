@@ -3,8 +3,8 @@
     <a href="{{url('user',[$resource->id, $typeId])}}">
         <div class="group w-[290px] xl:mb-0 mb-8">
             <div class="relative w-[290px] h-[162px]">
-                <img alt="{{$resource->thumbnailLocation}}"
-                    src="http://learn-english.moe.gov.et/storage/Thumbnail/listening.png" tabindex="{{ $typeId }}"
+                <img alt="{{$resource->thumbnailLocation}}" src="https://picsum.photos/id/{{ $typeId }}/290/162"
+                    tabindex="{{ $typeId }}"
                     class="w-[290px] h-[162px] rounded-t object-cover filer bg-blend-color group-hover:brightness-75" />
                 @if($resource->link == 0)
                 <div class="absolute w-full items-center bottom-0 left-0 backdrop-filter backdrop-brightness-50 ">
@@ -16,7 +16,7 @@
                 </div>
                 @endif
             </div>
-            <div class="flex justify-between bg-white rounded-b-md h-24">
+            <div class="flex justify-between rounded-b-md h-24">
                 <div class="px-2 pt-1">
                     <h2 tabindex="{{ $typeId }}" class="text-lg font-semibold text-gray-600">
                         @if($resource->media->name == "Document"||$resource->media->name == "document" ||
