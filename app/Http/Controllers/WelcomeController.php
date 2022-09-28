@@ -42,11 +42,11 @@ class WelcomeController extends Controller
     {
         // Fetch the Site Settings object
         //Cache Grades
-        $this->grades=cache()->remember('grades', 60*60*24*30, function () {
+        $this->grades=cache()->remember('grades', 60, function () {
             return Grade::orderBy('name', 'desc')->get();
         });
         //Cache all unique subjects
-        $this->commonCourses=cache()->remember('commonCourses', 60*60*6, function () {
+        $this->commonCourses=cache()->remember('commonCourses', 60, function () {
             return Course::select('name')->distinct()->orderBy('name', 'asc')->get();
         });
         //cache all the available courses
@@ -54,40 +54,40 @@ class WelcomeController extends Controller
             return Course::select('name')->distinct()->orderBy('name', 'asc')->get();
         });
         //Cache all types
-        $this->types2= cache()->remember('type2', 60*60*24*30, function () {
+        $this->types2= cache()->remember('type2', 60, function () {
             return Type::orderBy('name', 'desc')->get();
         });
         //Cache all medias
-        $this->medias= cache()->remember('medias', 60*60*24*30, function () {
+        $this->medias= cache()->remember('medias', 60, function () {
             return Media::orderBy('name', 'asc')->get();
         });
         //Cache resource tag
-        $this->resources0=cache()->remember('resource0', 60*60*24*10, function () {
+        $this->resources0=cache()->remember('resource0', 60, function () {
             return Resource::groupBy('tag')->pluck('tag');
         });
         //Cache Grade level
-        $this->resources1=cache()->remember('resources1', 60*60*24*10, function () {
+        $this->resources1=cache()->remember('resources1', 60, function () {
             return Grade::pluck('name');
         });
         //Cache Subject name
-        $this->resources2=cache()->remember('resources2', 60*60*24*10, function () {
+        $this->resources2=cache()->remember('resources2', 60, function () {
             return Course::groupBy('name')->pluck('name');
         });
        
         //Cache media name
-        $this->resources5=cache()->remember('resources5', 60*60*24*10, function () {
+        $this->resources5=cache()->remember('resources5', 60, function () {
             return Media::groupBy('name')->pluck('name');
         });
         //Cache content type
-        $this->resources6=cache()->remember('resources6', 60*60*24*10, function () {
+        $this->resources6=cache()->remember('resources6', 60, function () {
             return Type::groupBy('name')->pluck('name');
         });
         //Cache Description
-        $this->resources7=cache()->remember('resources7', 60*60*24*10, function () {
+        $this->resources7=cache()->remember('resources7', 60, function () {
             return Resource::groupBy('description')->pluck('description');
         });
         //Cache tag by making to one all the above
-        $this->tag=cache()->remember('tag', 60*60*24*11, function () {
+        $this->tag=cache()->remember('tag', 60, function () {
             foreach ($this->resources0 as $tags) {
                 if ($tags!=null) {
                     array_push($this->tag, $tags);
@@ -384,7 +384,7 @@ class WelcomeController extends Controller
             }
         }
         $prefix = "SELECT * from resources";
-        $new_sql = $prefix.$sql;
+        $new_sql = $prefix.$sql.'order by rand()';
         $types = Type::orderBy('created_at', 'asc')->get();
         $type_check = [];
 
